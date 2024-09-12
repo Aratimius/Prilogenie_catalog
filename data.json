@@ -1,0 +1,83 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "title": "игры",
+      "description": "Большой ассортимент компьютерных игр."
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "title": "программы",
+      "description": "полезные утилиты для вашего компьютера"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "title": "God of War",
+      "description": "компьютерная игра в жанре action-adventure, разработанная компанией SIE Santa Monica Studio и изданная Sony Interactive Entertainment для игровой консоли PlayStation 4, а затем на Windows.",
+      "image": "catalog/photo/god_of_war.jpeg",
+      "price": 4000,
+      "creation_date": "2018-04-20",
+      "last_mod_date": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "title": "Cyberpunk 2077",
+      "description": "компьютерная игра в жанре Action/RPG в открытом мире, разработанная и изданная польской студией CD Projekt",
+      "image": "catalog/photo/cyberpunk_2077.jpg",
+      "price": 5000,
+      "creation_date": "2020-12-10",
+      "last_mod_date": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "title": "Dead Space",
+      "description": "компьютерная игра в жанре survival horror, разработанная Motive Studio и изданная Electronic Arts. Ремейк одноимённой игры 2008 года, разработанной EA Redwood Shores.",
+      "image": "catalog/photo/dead_space.jpeg",
+      "price": 4500,
+      "creation_date": "2023-01-27",
+      "last_mod_date": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "category": 2,
+      "title": "NordVPN",
+      "description": "Надежный VPN",
+      "image": "catalog/photo/nord.jpeg",
+      "price": 1000,
+      "creation_date": null,
+      "last_mod_date": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "category": 2,
+      "title": "Kaspersky",
+      "description": "Защита в режиме реального времени – важнейший компонент антивирусных решений, таких как новые планы Kaspersky. Он автоматически обеспечивает непрерывную защиту от онлайн-угроз, выполняет поиск подозрительных файлов и приложений, обнаруживает и предотвращает атаки.",
+      "image": "catalog/photo/kaspersky.jpeg",
+      "price": 2000,
+      "creation_date": "2024-09-12",
+      "last_mod_date": "2024-09-12"
+    }
+  }
+]
