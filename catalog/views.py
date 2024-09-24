@@ -1,35 +1,34 @@
-from django.shortcuts import render
 from catalog.models import Product
+from django.views.generic import ListView, DetailView, TemplateView
 
 
-def home(request):
-    """Контроллер отображения главной страницы"""
-    last_products = Product.objects.order_by('-id')[0:3]  # выборка последних 3 продуктов
-    print('Последние 3 добавленных в каталог продукта:')
-    for product in last_products:
-        print(product)
-    products = Product.objects.all()
-    context = {
-        'object_list': products,
+class ProductListView(ListView):
+    model = Product
+    extra_context = {
         'title': 'Интернет-магазин'
     }
-    return render(request, 'home.html', context)
 
 
-def product_details(request, pk):
-    product = Product.objects.get(pk=pk)
-    context = {
-        'object': product,
-        'title': product.title
-    }
-    return render(request, 'product_details.html', context)
+class ProductDetailView(DetailView):
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        object = Product.objects.get(pk=self.kwargs['pk'])
+        context_data['title'] = object.title
+        return context_data
 
 
-def contacts(request):
-    """Контроллер отображения страницы с контактными данными"""
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
-        print(f'Имя: {name}; телефон: {phone}; сообщение: {message}')
-    return render(request, 'contacts.html')
+
+
+
+class ContactsTemplateView(TemplateView):
+    template_name = 'catalog/contacts.html'
+
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            name = request.POST.get('name')
+            phone = request.POST.get('phone')
+            message = request.POST.get('message')
+            print(f'Имя: {name}; телефон: {phone}; сообщение: {message}')
+        return self.get(request, *args, **kwargs)

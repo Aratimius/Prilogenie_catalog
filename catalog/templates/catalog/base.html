@@ -105,6 +105,52 @@
         .bd-mode-toggle .dropdown-menu .active .bi {
           display: block !important;
         }
+        .carousel-inner img {
+            display: block;
+            width: 600px;
+            height: 350px !important;
+            margin: 0 auto;
+        }
+        .item-img {
+            width: 600px;
+            height: 350px;
+            background-repeat: no-rpeat;
+            background-position: center;
+            -webkit-background-size: cover;
+            background-size: cover;
+            margin: 0 auto;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .cards_item:not(:last-child) {
+            margin-right: 20px;
+        }
+        .card_title {
+            margin: 0;
+            margin-bottom: 15px;
+        }
+        .card_descr {
+            margin: 0;
+            margin-bottom: 15px;
+        }
+        .card_btn {
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .card_content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body {
+            height: 100%
+        }
     </style>
 
 
@@ -180,7 +226,7 @@
 
 
 <header data-bs-theme="dark">
-{% include 'includes/inc_menu.html' %}
+{% include 'catalog/includes/inc_menu.html' %}
 </header>
 
 <main>
@@ -188,8 +234,12 @@
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
+                {% if object %}
+                <h1 class="fw-light">{{ title }}</h1>
+                {% else %}
                 <h1 class="fw-light">BuyBOX</h1>
                 <p class="lead text-body-secondary">{{ title }}</p>
+                {% endif %}
             </div>
         </div>
     </section>
@@ -198,16 +248,7 @@
     {% endblock %}
 </main>
 
-<footer class="text-body-secondary py-5">
-    <div class="container">
-        <p class="float-end mb-1">
-            <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
-                href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
-    </div>
-</footer>
+
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
 </body>

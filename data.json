@@ -60,7 +60,7 @@
     "fields": {
       "category": 2,
       "title": "NordVPN",
-      "description": "Надежный VPN",
+      "description": "Надежный VPN.Он предоставляет настольные приложения для Windows, macOS и Linux, мобильные приложения для Android и iOS, а также приложение для AndroidTV. Также доступна ручная настройка беспроводных маршрутизаторов, устройств NAS и других платформ",
       "image": "catalog/photo/nord.jpeg",
       "price": 1000,
       "creation_date": null,
