@@ -43,13 +43,11 @@ class BlogDetailView(DetailView):
     model = Blog
 
     def get_context_data(self, **kwargs):
-        """Зпередать объекту заголовок статьи"""
+        """Передать объекту заголовок статьи"""
         context_data = super().get_context_data(**kwargs)
-        object = Blog.objects.get(pk=self.kwargs['pk'])
-        context_data['title'] = object.title
+        context_data['title'] = Blog.objects.get(pk=self.kwargs['pk'])
         return context_data
 
-    #  МЕТОД РАБОТАЕТ КРИВО, ДОБАВЛЯЯ ПО 2 ПРОСМОТРА ПРИ ОБНОВЛЕНИИ СТРАНИЦЫ. ПОЧЕМУ?
     def get_object(self, queryset=None):
         """Метод для увеличения счетчика просмотров"""
         self.object = super().get_object(queryset)

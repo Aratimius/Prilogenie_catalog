@@ -1,11 +1,11 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<div class="row text-center">
-    <div class="col-lg-9 col-md-6 col-sm-12 mx-auto">
-        <div class="card">
-            <div class="card-body">
-                <form method="post">
+<form method="post" enctype="multipart/form-data">
+    <div class="row text-center">
+        <div class="col-lg-9 col-md-6 col-sm-12 mx-auto">
+            <div class="card">
+                <div class="card-body">
                     {% csrf_token %}
                     {{ form.as_p }}
                     {% if object %}
@@ -13,9 +13,12 @@
                     {% else %}
                     <button type="submit" class="btn btn-success">Опубликовать</button>
                     {% endif %}
-                </form>
+                    <div class="btn-group">
+                        <a class="btn btn-danger " href="{% url 'blog:list' %}" role="button">Отмена</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 {% endblock %}

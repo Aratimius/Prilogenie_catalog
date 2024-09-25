@@ -3,6 +3,12 @@
 {% block content %}
 
 
+<div class="row text-center">
+    <div class="col-3 mb-5 mx-auto">
+        <a href="{% url 'catalog:create' %}" type="button"
+           class="btn btn-lg btn-block btn-outline-dark">Добавить продукт</a>
+    </div>
+</div>
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -18,8 +24,12 @@
                             <p class="card-text text-center">{{ object.description|truncatechars:100}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group margin-top:auto ">
-                                    <a class="btn btn-dark" href="{% url 'catalog:product_details' object.pk %}"
+                                    <a class="btn btn-dark mx-1 rounded-pill" href="{% url 'catalog:update' object.pk %}"
+                                       role="button">Форматировать</a>
+                                    <a class="btn btn-dark rounded-pill" href="{% url 'catalog:product_details' object.pk %}"
                                        role="button">Подробнее</a>
+                                    <a class="btn btn-danger mx-1 rounded-pill" href="{% url 'catalog:delete' object.pk %}"
+                                       role="button">Удалить</a>
                                 </div>
                             </div>
                         </div>
