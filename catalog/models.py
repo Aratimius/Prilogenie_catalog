@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 
 class Category(models.Model):
     title = models.CharField(max_length=150, verbose_name='название')
@@ -16,6 +18,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name='продавец')
 
     title = models.CharField(max_length=150, verbose_name='название')
     description = models.TextField(verbose_name='описание')

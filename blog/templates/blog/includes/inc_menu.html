@@ -8,8 +8,11 @@
             <div class="col-sm-4 offset-md-1 py-4">
                 <h4>Навигация по сайту</h4>
                 <ul class="list-unstyled">
+                    {% if user.is_authenticated %}
                     <li><a href="{% url 'catalog:home' %}" class="text-dark">Каталог</a></li>
                     <li><a href="{% url 'catalog:contacts' %}" class="text-dark">Контакты</a></li>
+                    <li><a href="{% url 'users:logout' %}" class="text-dark">Выход</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

@@ -1,0 +1,28 @@
+[
+  {
+    "model": "blog.blog",
+    "pk": 22,
+    "fields": {
+      "title": "коржик",
+      "slug": "korzhik",
+      "content": "Коржик еще щеночек",
+      "preview": "blog/photo/коржик_wHObb8g.jpg",
+      "creation_date": "2024-09-24",
+      "publication_sign": true,
+      "views": 22
+    }
+  },
+  {
+    "model": "blog.blog",
+    "pk": 23,
+    "fields": {
+      "title": "Кузьмич",
+      "slug": "kuzmich",
+      "content": "Кузя",
+      "preview": "blog/photo/Кузьмич.jpg",
+      "creation_date": "2024-09-24",
+      "publication_sign": true,
+      "views": 5
+    }
+  }
+]
