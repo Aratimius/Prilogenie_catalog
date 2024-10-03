@@ -16,7 +16,7 @@ class StyleFormMixin:
 class ProductForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Product
-        fields = ('category', 'title', 'description', 'image', 'price', 'creation_date')
+        fields = ('category', 'title', 'description', 'image', 'price', 'is_published', 'creation_date',)
 
     def clean_sample(self, model_attribute: str, attribute_name: str):
         """Метод для избежания дублирования кода в clean_.."""
@@ -53,3 +53,9 @@ class VersionForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Version
         fields = "__all__"
+
+
+class ProductModeratorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ('category', 'description', 'is_published',)

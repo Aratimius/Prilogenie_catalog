@@ -2,12 +2,14 @@
 {% load my_tags %}
 {% block content %}
 
+{% if perms.blog.create_blog %}
 <div class="row text-center">
     <div class="col-3 mb-5 mx-auto">
         <a href="{% url 'blog:create' %}" type="button"
            class="btn btn-lg btn-block btn-outline-info">Добавить блог</a>
     </div>
 </div>
+{% endif %}
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -23,12 +25,14 @@
                             <p class="card-text text-center">{{ object.content|truncatechars:100}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group margin-top:auto ">
-                                    <a class="btn btn-info mx-1 rounded-pill" href="{% url 'blog:update' object.pk %}"
-                                       role="button">Форматировать</a>
                                     <a class="btn btn-info mx-1 rounded-pill" href="{% url 'blog:detail' object.pk %}"
                                        role="button">Подробнее</a>
+                                    {% if perms.blog.change_blog and perms.blog.delete_blog or user.is_superuser%}
+                                    <a class="btn btn-info mx-1 rounded-pill" href="{% url 'blog:update' object.pk %}"
+                                       role="button">Форматировать</a>
                                     <a class="btn btn-danger mx-1 rounded-pill" href="{% url 'blog:delete' object.pk %}"
                                        role="button">Удалить</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

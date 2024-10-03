@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from pytils.translit import slugify
@@ -6,7 +8,7 @@ from blog.models import Blog
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 
-class BlogListView(ListView):
+class BlogListView(LoginRequiredMixin, ListView):
     model = Blog
 
     def get_queryset(self):
@@ -20,6 +22,11 @@ class BlogCreateView(CreateView):
     model = Blog
     fields = ('title', 'content', 'preview', 'publication_sign')
     success_url = reverse_lazy('blog:list')
+
+    # def get_form_class(self):
+    #     user = self.request.user
+    #     if user.has_perm('blog.change_blog') is False:
+    #         raise PermissionDenied
 
     def form_valid(self, form):
         """Автоматическое создание slug"""

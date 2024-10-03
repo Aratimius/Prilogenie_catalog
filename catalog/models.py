@@ -26,11 +26,18 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='цена')
     creation_date = models.DateField(blank=True, null=True, verbose_name='дата создания')
     last_mod_date = models.DateField(blank=True, null=True, verbose_name='дата последнего изменения')
+    is_published = models.BooleanField(default=False, verbose_name='опубликовано')
 
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         ordering = ['title', 'category']
+        permissions = [
+            ('can_edit_category', 'Can edit category'),
+            ('can_edit_description', 'Can edit description'),
+            ('set_published_status', 'Can change publication'),
+        ]
+
 
     def __str__(self):
         return self.title

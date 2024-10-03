@@ -6,6 +6,9 @@
                 <p class="text-body-secondary">Записи пользователей</p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
+                {% if user.is_authenticated %}
+                <p class="text-body-secondary">Вы вошли под {{ user.email }}</p>
+                {% endif %}
                 <h4>Навигация по сайту</h4>
                 <ul class="list-unstyled">
                     {% if user.is_authenticated %}

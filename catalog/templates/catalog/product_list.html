@@ -26,12 +26,14 @@
                             <p class="card-text text-center">{{ object.description|truncatechars:100}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group margin-top:auto ">
-                                    <a class="btn btn-dark mx-1 rounded-pill" href="{% url 'catalog:update' object.pk %}"
-                                       role="button">Форматировать</a>
                                     <a class="btn btn-dark rounded-pill" href="{% url 'catalog:product_details' object.pk %}"
                                        role="button">Подробнее</a>
+                                    {% if perms.catalog.can_edit_category and perms.catalog.can_edit_description and perms.catalog.set_published_status or user == object.user or user.is_superuser %}
+                                    <a class="btn btn-dark mx-1 rounded-pill" href="{% url 'catalog:update' object.pk %}"
+                                       role="button">Форматировать</a>
                                     <a class="btn btn-danger mx-1 rounded-pill" href="{% url 'catalog:delete' object.pk %}"
                                        role="button">Удалить</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

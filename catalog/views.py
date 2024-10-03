@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Version
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
@@ -22,6 +23,8 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         context_data['title'] = Product.objects.get(pk=self.kwargs['pk'])
+
+        #  Достать все версии принадлежащие данному продукту:
         all_versions = Version.objects.all()
         product_versions = []
         for version in all_versions:
@@ -45,9 +48,6 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-
-
-
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
@@ -63,6 +63,15 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         else:
             context_data['formset'] = VersionFormset(instance=self.object)
         return context_data
+
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.user or user.is_superuser is True:
+            return ProductForm
+        elif (user.has_perm('catalog.can_edit_category') and user.has_perm('catalog.can_edit_description')
+              and user.has_perm('catalog.set_published_status')):
+            return ProductModeratorForm
+        raise PermissionDenied
 
     def form_valid(self, form):
         """Сохранение данных дополнительно в формсет"""

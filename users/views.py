@@ -1,6 +1,7 @@
 import random
 import string
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView as BaseLoginView, PasswordResetView
 from django.contrib.auth.views import LogoutView as BaseLogoutView
 from django.core.mail import send_mail
@@ -55,7 +56,7 @@ def email_verification(request, token):
     return redirect(reverse("users:login"))
 
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserForm
     template_name = 'users/profile.html'
