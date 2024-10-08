@@ -4,9 +4,10 @@ from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
 
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Category
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
+from catalog.services import get_objects_from_cache
 from users.models import User
 
 
@@ -15,6 +16,9 @@ class ProductListView(ListView):
     extra_context = {
         'title': 'Интернет-магазин'
     }
+
+    def get_queryset(self):
+        return get_objects_from_cache(Product)
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
@@ -101,3 +105,13 @@ class ContactsTemplateView(TemplateView):
             message = request.POST.get('message')
             print(f'Имя: {name}; телефон: {phone}; сообщение: {message}')
         return self.get(request, *args, **kwargs)
+
+
+class CategoryListView(ListView):
+    model = Category
+    extra_context = {
+        'title': 'Категории продуктов'
+    }
+
+    def get_queryset(self):
+        return get_objects_from_cache(Category)
